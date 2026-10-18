@@ -1,4 +1,4 @@
-﻿# Playwright Framework
+# Playwright Framework
 
 A reusable TypeScript package for Playwright Page Objects and fixtures.
 It is independent of the application under test.
@@ -60,14 +60,14 @@ and running tests.
 ### Install from a GitHub release
 
 The release workflow builds, checks, and packages the framework on GitHub
-when a version tag such as `v1.0.0` is pushed. The tag must match the version
+when a version tag such as `v1.0.1` is pushed. The tag must match the version
 in `package.json`. The `.tgz` package is attached to the GitHub release and
 also uploaded as a workflow artifact.
 
 Install the release package in a consuming project:
 
 ```sh
-npm install https://github.com/OualidUchiha/PlayWrightRobot/releases/download/v1.0.0/automation-framework-1.0.0.tgz
+npm install https://github.com/OualidUchiha/PlayWrightRobot/releases/download/v1.0.1/automation-framework-1.0.1.tgz
 ```
 
 For a private repository, authenticated access is required to download the
@@ -78,8 +78,8 @@ the changes, then push the matching tag. For the initial version:
 
 ```sh
 git push origin main
-git tag v1.0.0
-git push origin v1.0.0
+git tag v1.0.1
+git push origin v1.0.1
 ```
 
 Commit `src/`, `generate-page-types.cjs`, `package.json`, `package-lock.json`,
