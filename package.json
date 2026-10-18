@@ -1,0 +1,14 @@
+{
+  "name": "@automation/framework",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist", "generate-page-types.cjs"],
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
+    "./generate-page-types": "./generate-page-types.cjs"
+  },
+  "scripts": { "build": "tsc -p tsconfig.json", "typecheck": "tsc -p tsconfig.json --noEmit" },
+  "peerDependencies": { "@playwright/test": "^1.63.0" },
+  "devDependencies": { "@playwright/test": "^1.63.0", "@types/node": "^26.6.5", "typescript": "^5.9.3" }
+}
