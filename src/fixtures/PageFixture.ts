@@ -14,12 +14,12 @@ export function pageFixture<T>(PageClass: PageConstructor<T>) {
 
 type PageRegistry = Record<string, PageConstructor<BasePage>>;
 
-// Les objets que les tests recevront
+// Page instances provided to tests.
 export type PageInstances<R extends PageRegistry> = {
   [K in keyof R]: InstanceType<R[K]>;
 };
 
-// Les fonctions qui fourniront ces objets
+// Fixture functions that provide these instances.
 type FixtureDefinitions<R extends PageRegistry> = {
   [K in keyof R]: (
     args: { page: Page },

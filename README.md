@@ -1,11 +1,11 @@
-# Framework Playwright
+﻿# Playwright Framework
 
-Package TypeScript réutilisable pour les Page Objects et les fixtures Playwright.
-Il ne dépend d’aucune application testée.
+A reusable TypeScript package for Playwright Page Objects and fixtures.
+It is independent of the application under test.
 
-## Installation et compilation
+## Installation and build
 
-Depuis la racine de ce package, dans un dépôt autonome :
+From the package root in a standalone repository:
 
 ```sh
 npm ci
@@ -13,16 +13,16 @@ npm run typecheck
 npm run build
 ```
 
-Dans le workspace de développement existant, installer les dépendances à la
-racine du workspace et lancer `npm run build` depuis cette racine.
+In the existing development workspace, install dependencies at the workspace
+root and run `npm run build` from there.
 
-Modifier les fichiers dans `src/`. `dist/` contient le JavaScript compilé et
-les déclarations TypeScript ; il est généré et ignoré par Git.
+Edit the files in `src/`. The `dist/` directory contains compiled JavaScript
+and TypeScript declarations. It is generated automatically and ignored by Git.
 
-## Utilisation
+## Usage
 
-Compiler puis créer une archive avec `npm pack`. Installer cette archive dans
-le projet d’automatisation, ainsi que `@playwright/test`.
+Build the framework, then create a package archive with `npm pack`. Install
+that archive in your automation project, along with `@playwright/test`.
 
 ```ts
 import { BasePage } from "@automation/framework";
@@ -36,27 +36,27 @@ export class LoginPage extends BasePage {
 }
 ```
 
-Le package exporte également `creerPageRegistry`, `buildPageFixtures`,
-`pageFixture`, `PageInstances`, `PagesFromModule`, `PageConstructor` et `PageRegistry`.
+The package also exports `creerPageRegistry`, `buildPageFixtures`,
+`pageFixture`, `PageInstances`, `PagesFromModule`, `PageConstructor`, and `PageRegistry`.
 
-`creerPageRegistry(cheminAbsoluDesPages)` découvre les classes exportées héritant
-de `BasePage`, dans les fichiers `.ts` directement dans le dossier indiqué.
-Le nom exporté `LoginPage` devient la fixture `loginPage`.
-Cette découverte s’exécute avec le chargement TypeScript fourni par Playwright.
+`creerPageRegistry(absolutePagesPath)` discovers exported classes extending
+`BasePage` in `.ts` files directly inside the specified directory.
+The exported name `LoginPage` becomes the fixture name `loginPage`.
+Discovery runs using the TypeScript loading support provided by Playwright.
 
-Pour générer les types depuis le projet consommateur :
+To generate types from the consuming project:
 
 ```sh
 node -e "require('@automation/framework/generate-page-types')('pages', 'generated/page-registry.generated.ts')"
 ```
 
-Les chemins sont relatifs au dossier courant. Le fichier généré appartient au
-projet consommateur et permet de typer le registre découvert. Relancer la
-génération après ajout ou suppression d’un fichier de pages, avant le typage
-et l’exécution des tests.
+Paths are relative to the current working directory. The generated file belongs
+to the consuming project and provides types for the discovered registry. Run
+generation again after adding or removing a page file, before type checking
+and running tests.
 
 ## GitHub
 
-Versionner `src/`, `generate-page-types.cjs`, `package.json`, `package-lock.json`,
-`tsconfig.json`, `.gitignore` et ce README. Les fichiers compilés sont inclus
-dans l’archive npm, sans être versionnés dans Git.
+Commit `src/`, `generate-page-types.cjs`, `package.json`, `package-lock.json`,
+`tsconfig.json`, `.gitignore`, and this README. Compiled files are included
+in the npm package archive but are not tracked in Git.
