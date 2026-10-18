@@ -1,0 +1,39 @@
+name: Build and release framework
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Check release version
+        run: node -e 'if (process.env.GITHUB_REF_NAME !== "v" + require("./package.json").version) throw new Error("Tag must match package.json version")'
+      - run: npm run typecheck
+      - run: npm run build
+      - name: Package framework
+        run: |
+          mkdir -p artifacts
+          npm pack --pack-destination artifacts
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: framework-package
+          path: artifacts/*.tgz
+          if-no-files-found: error
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" artifacts/*.tgz --verify-tag --title "$GITHUB_REF_NAME" --generate-notes
