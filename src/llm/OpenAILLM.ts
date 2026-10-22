@@ -1,7 +1,7 @@
 // providers/OpenAILLM.ts
 
 import OpenAI from "openai";
-import { LLM } from "./LLM";
+import type { LLM } from "./Llm";
 
 
 export class OpenAILLM implements LLM {
