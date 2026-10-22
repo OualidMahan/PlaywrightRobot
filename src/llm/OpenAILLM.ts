@@ -1,16 +1,15 @@
 // providers/OpenAILLM.ts
 
 import OpenAI from "openai";
-import { LlM } from "./LLM";
+import { LLM } from "./LLM";
 
 
-export class OpenAILLM implements LlM {
+export class OpenAILLM implements LLM {
   private readonly client: OpenAI;
 
-  constructor(
-    private readonly modele: string = "openai/gpt-oss-20b"
-  ) {
-    const apiKey = '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';
+  constructor(private readonly modele: string = "openai/gpt-oss-20b") {
+    const apiKey =
+      "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";
 
     if (!apiKey) {
       throw new Error("La variable NVIDIA_API_KEY est manquante.");
