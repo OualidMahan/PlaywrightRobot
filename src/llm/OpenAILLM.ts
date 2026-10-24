@@ -9,7 +9,7 @@ export class OpenAILLM implements LLM {
 
   constructor(private readonly modele: string = "openai/gpt-oss-20b") {
     const apiKey =
-      "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";
+      process.env.NVIDIA_API_KEY;
 
     if (!apiKey) {
       throw new Error("La variable NVIDIA_API_KEY est manquante.");
