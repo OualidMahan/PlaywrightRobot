@@ -1,18 +1,16 @@
-// providers/OpenAILLM.ts
-
 import OpenAI from "openai";
-import type { LLM } from "./Llm";
+import type { LLM } from "./llm";
 
 
 export class OpenAILLM implements LLM {
   private readonly client: OpenAI;
 
-  constructor(private readonly modele: string = "openai/gpt-oss-20b") {
+  constructor(private readonly model: string = "openai/gpt-oss-20b") {
     const apiKey =
       process.env.NVIDIA_API_KEY;
 
     if (!apiKey) {
-      throw new Error("La variable NVIDIA_API_KEY est manquante.");
+      throw new Error("The NVIDIA_API_KEY environment variable is missing.");
     }
 
     this.client = new OpenAI({
@@ -21,9 +19,9 @@ export class OpenAILLM implements LLM {
     });
   }
 
-  async generer(prompt: string): Promise<string> {
+  async generate(prompt: string): Promise<string> {
     const completion = await this.client.chat.completions.create({
-      model: this.modele,
+      model: this.model,
       messages: [{ role: "user", content: prompt }],
       temperature: 1,
       top_p: 1,
@@ -31,16 +29,16 @@ export class OpenAILLM implements LLM {
       stream: true,
     });
 
-    let reponse = "";
+    let response = "";
 
     for await (const chunk of completion) {
-      const contenu = chunk.choices[0]?.delta?.content;
+      const content = chunk.choices[0]?.delta?.content;
 
-      if (contenu) {
-        reponse += contenu;
+      if (content) {
+        response += content;
       }
     }
 
-    return reponse;
+    return response;
   }
 }

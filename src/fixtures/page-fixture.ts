@@ -1,5 +1,5 @@
 import type { Page } from "@playwright/test";
-import type { BasePage } from "../BasePage";
+import type { BasePage } from "../base-page";
 
 type PageConstructor<T> = new (page: Page) => T;
 
