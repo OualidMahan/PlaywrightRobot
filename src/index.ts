@@ -4,6 +4,7 @@ export type { PageConstructor, PageRegistry, PagesFromModule } from "./fixtures/
 export { buildPageFixtures, pageFixture } from "./fixtures/page-fixture";
 export type { PageInstances } from "./fixtures/page-fixture";
 export { OpenAILLM } from "./llm/openai-llm";
+export type { OpenAILLMOptions } from "./llm/openai-llm";
 export type { LLM } from "./llm/llm";
 export { SelfHealer } from "./self-healing/self-healer";
 export { ConsoleLogger } from "./logging/logger";
